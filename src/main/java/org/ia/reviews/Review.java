@@ -12,7 +12,5 @@ public class Review {
 
     private @Id @GeneratedValue Long id;
     private String model;
-    private String review;
     private float rating;
-    private String author;
 }

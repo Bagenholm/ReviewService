@@ -8,8 +8,8 @@ import java.util.List;
 @RestController
 public class ReviewController {
 
+    private RestTemplate restTemplate;
     private Storage reviewStorage;
-    RestTemplate restTemplate;
 
     public ReviewController(Storage reviewStorage) {
         this.reviewStorage = reviewStorage;
@@ -30,9 +30,12 @@ public class ReviewController {
         return reviewStorage.save(review);
     }
 
-//    @GetMapping("/televisions")
-//    public void getTelevisions() {
-//        restTemplate.getForObject("https://")
-//        System.out.println();
-//    }
+    @PostMapping("/manyreviews")
+    public List<Review> addFromData(@RequestBody ReviewWrapper reviewWrapper) {
+
+        reviewWrapper.reviews.stream().forEach( review -> reviewStorage.save(review));
+
+        return reviewStorage.findAll();
+    }
+
 }
